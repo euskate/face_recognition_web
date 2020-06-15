@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>고객 관리 얼굴 인식 </h1>
+
+  <img src="/face/stream/" alt="스트리밍" >
+
+   <div> <button type="submit" id="test">test</button> </div>
+   <div> <button type="submit" id="capture">capture</button> </div>
+   
+   
+   <div> 이름 <span class="f_name"> </span>    </div>
+   <div> 정확도 <span class="f_accuracy"> </span>    </div>
+   <div> 시간 <span class="f_time"> </span>    </div>
+   
+   <div> 한글이름 <input type="text" id="han_name" value="한글"> </div>
+   <div> 영어이름 <input type="text" id="eng_name" value="english"> </div>
+  </form>
+  <div> <button type="submit" id="classifier">classifier</button> </div>
+  
+  <div> <button type="submit" id="check">check</button> </div>
+  <div> <span class="han_name"> </span>    </div>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript">
+    $("#test").click(function(){
+      $.ajax({ // 버튼을 클릭하면 <새로고침> 없이 ajax로 서버와 통신하겠다.
+        url: "/face/caps/", // 통신할 url을 지정
+        dataType: 'json',
+        success: function(data){ // 통신 성공시 - 동적으로 좋아요 갯수 변경, 유저 목록 변경
+          // alert('통신 성공');
+          $(".f_name").text(data.f_name)
+          $(".f_accuracy").text(data.f_accuracy)
+          $(".f_time").text(data.f_time)
+          // $(".f_image").text(data.f_image)
+        },
+        error: function(request, status, error){ // 통신 실패시 - 로그인 페이지 리다이렉트
+          alert("통신 실패")
+          window.location.replace("/face/service/")
+          //  alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+        },
+      });
+    })
+
+    // 사진 캡쳐
+    $("#capture").click(function(){
+      $.ajax({
+        url: "/face/capture/", 
+        dataType: 'json',
+        success: function(data){
+        },
+        error: function(request, status, error){
+          alert("통신 실패")
+          window.location.replace("/face/service/")
+        },
+      });
+    })
+
+    // 분류기
+    $("#classifier").click(function(){
+      $.ajax({
+        type : 'POST',
+        url: "/face/classifier/", 
+        data: {
+              'han_name' : $('#han_name').val(),
+              'eng_name' : $('#eng_name').val()
+        },
+        dataType: 'json',
+        success: function(data){
+          alert("통신 성공")
+        },
+        error: function(request, status, error){
+          alert("통신 실패")
+          window.location.replace("/face/service/")
+        },
+      });
+    })
+
+    // 확인
+    $("#check").click(function(){
+      $.ajax({
+        url: "/face/check/", 
+        dataType: 'json',
+        success: function(data){
+//          alert("통신 성공")
+          $(".f_name").text(data.f_name)
+          $(".han_name").text(data.han_name+"님 안녕하세요.\n"+data.fav_menus+"는 어떠세요?")      
+        },
+        error: function(request, status, error){
+          alert("통신 실패")
+          window.location.replace("/face/service/")
+        },
+      });
+    })
+
+  </script>
+</body>
+</html>

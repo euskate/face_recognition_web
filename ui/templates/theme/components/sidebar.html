@@ -1,0 +1,64 @@
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+      <!-- Sidebar - Brand -->
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'index_url' %}">
+        <div class="sidebar-brand-icon rotate-n-15">
+          <i class="fas fa-laugh-wink"></i>
+        </div>
+        <div class="sidebar-brand-text mx-3"> {{WEBSITE_TOP_LEFT_NAME}} </div>
+      </a>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'users:service_page_url' %}">
+          <i class="fas fa-fw fa-video"></i>
+          <span>얼굴인식 서비스 </span></a>
+      </li>
+
+
+      <!-- Nav Item - Pages Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTable" aria-expanded="true" aria-controls="collapseTable">
+          <i class="fas fa-fw fa-table"></i>
+          <span>테이블 정보</span>
+        </a>
+        <div id="collapseTable" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">데이터 테이블:</h6>
+            <a class="collapse-item" href="{% url 'users:customers_page_url' %}">고객 정보</a>
+            <a class="collapse-item" href="{% url 'users:menus_page_url' %}">메뉴 정보</a>
+            <a class="collapse-item" href="{% url 'users:sales_page_url' %}">판매 정보</a>
+          </div>
+        </div>
+      </li>
+
+
+      <!-- Nav Item - Pages Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseChart" aria-expanded="true" aria-controls="collapseChart">
+          <i class="fas fa-fw fa-chart-area"></i>
+          <span>차트 정보</span>
+        </a>
+        <div id="collapseChart" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">데이터 차트:</h6>
+            <a class="collapse-item" href="{% url 'users:month_chart_page_url' %}">월별 차트 </a>
+            <a class="collapse-item" href="{% url 'users:revenue_chart_page_url' %}">수입원 차트</a>
+            <a class="collapse-item" href="#">계절별 차트 (준비중)</a>
+            <a class="collapse-item" href="#">연도별 차트 (준비중)</a>
+            <a class="collapse-item" href="#">선호도 차트 (준비중)</a>
+          </div>
+        </div>
+      </li>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider d-none d-md-block">
+
+      <!-- Sidebar Toggler (Sidebar) -->
+      <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+      </div>
+
+    </ul>

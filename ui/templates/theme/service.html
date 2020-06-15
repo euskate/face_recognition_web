@@ -1,0 +1,426 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Blank {% endblock %}
+
+{% block container_fluid %}
+<div class="container-fluid">
+
+	<!-- Page Heading -->
+
+	<h1 class="h3 mb-4 text-gray-800">고객 관리 얼굴 인식 </h1>
+  <!-- <img src="/face/stream/" alt="스트리밍" class="img-responsive img-thumbnail loading"> -->
+  
+  <!-- 얼굴인식 카메라 스트리밍 확인 -->
+  <img src="{% static 'resource/img/loading_black.gif' %}" data-src="/face/stream/" alt="스트리밍" class="img-responsive img-thumbnail loading">
+  <div id="img_desc">얼굴 인식 모델을 로딩합니다. 약간의 시간이 걸릴 수 있습니다.</div>
+
+  <!-- <a href="#purchase_title">test</a>
+  <div id="test2">test2</div>
+  
+   <div> <button class="btn btn-primary mb-1" type="submit" id="capture">capture</button> </div>
+   <div> <button class="btn btn-primary mb-1" type="submit" id="test">test</button> </div> -->
+
+   <!-- <div id="resultOfTest"></div>
+   <div> 이름 <span class="f_name"> </span>    </div>
+   <div> 정확도 <span class="f_accuracy"> </span>    </div>
+   <div> 시간 <span class="f_time"> </span>    </div>
+    -->
+   
+   
+   <div> <button class="btn btn-primary btn-lg mb-1" type="submit" id="check">인식</button> </div>
+   <div> <span class="han_name"> </span>    </div>
+
+  <!-- Collapsable Card Example -->
+  <div class="card shadow mb-4">
+    <!-- Card Header - Accordion -->
+    <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button"
+      aria-expanded="true" aria-controls="collapseCardExample">
+      <h6 class="m-0 font-weight-bold text-primary">얼굴 인식 서비스</h6>
+    </a>
+    <!-- Card Content - Collapse -->
+    <div class="collapse show" id="collapseCardExample">
+      <div class="card-body">
+
+        <!-- Content Row -->
+  <div class="row">
+    <!--  얼굴 인식 Card  -->
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card border-left-primary shadow h-100 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="h6 font-weight-bold text-primary text-uppercase mb-1">★프리미엄★얼굴 인식 (등록 회원)</div>
+              <div class="mt-3 mb-0">
+                <div id="customer_id" style="display: none;">-1</div>
+                <span id="f_name" class="font-weight-bold text-gray-800">인식 버튼을 눌러주세요.</span>
+                <span id="f_han_name" class="font-weight-bold text-gray-800"></span>
+              </div>
+            </div>
+            <div class="col-auto">
+              <i class="fas fa-user fa-2x text-gray-300"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--  연령 성별 예측 Card -->
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card border-left-success shadow h-100 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="h6 font-weight-bold text-success text-uppercase mb-1">연령별 성별 예측</div>
+              <div class="mt-3 mb-0">
+                <span id="f_age" class="font-weight-bold text-gray-800">인식 버튼을 눌러주세요.</span>
+                <span id="f_gender" class="font-weight-bold text-gray-800"></span>
+              </div>
+            </div>
+            <div class="col-auto">
+              <i class="fas fa-male fa-2x text-gray-300"></i>
+              <i class="fas fa-female fa-2x text-gray-300"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--  개인 선호 Card -->
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card border-left-warning shadow h-100 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="h6 font-weight-bold text-warning text-uppercase mb-1">★프리미엄★ 개인 선호 메뉴 추천</div>
+              <div class="mt-3 mb-0">
+                <p id="id_fav_menu0" class="mb-0 font-weight-bold text-gray-800">인식 버튼을 눌러주세요.</p>
+                <p id="id_fav_menu1" class="mb-0 font-weight-bold text-gray-800" onclick="menuSelect($(this).text())"></p>
+                <p id="id_fav_menu2" class="mb-0 font-weight-bold text-gray-800" onclick="menuSelect($(this).text())"></p>
+                <p id="id_fav_menu3" class="mb-0 font-weight-bold text-gray-800" onclick="menuSelect($(this).text())"></p>
+                <p id="id_fav_menu4" class="mb-0 text-gray-800"></p>
+              </div>
+            </div>
+            <div class="col-auto">
+              <i class="fas fa-star fa-2x text-gray-300"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--  연령별 성별 선호 메뉴 Card -->
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card border-left-info shadow h-100 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="h6 font-weight-bold text-info text-uppercase mb-1">연령대/성별 선호 메뉴 추천</div>
+              <div class="row no-gutters align-items-center">
+                <div class="col-auto">
+                  <div class="mt-3 mb-0">
+                    <p id="ag_fav_menu0" class="mb-0 font-weight-bold text-gray-800">인식 버튼을 눌러주세요.</p>
+                    <p id="ag_fav_menu1" class="mb-0 font-weight-bold text-gray-800" onclick="menuSelect($(this).text())"></p>
+                    <p id="ag_fav_menu2" class="mb-0 font-weight-bold text-gray-800" onclick="menuSelect($(this).text())"></p>
+                    <p id="ag_fav_menu3" class="mb-0 font-weight-bold text-gray-800" onclick="menuSelect($(this).text())"></p>
+                    <p id="ag_fav_menu4" class="mb-0 text-gray-800"></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-auto">
+              <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Content Row -->
+
+  <!-- 추가 카드  -->
+  <div class="row">
+    <!-- Earnings (Monthly) Card Example -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-1">
+                        <div class="text-s font-weight-bold text-primary text-uppercase mb-1">시즌 메뉴 추천 (서비스 예정)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Earnings (Monthly) Card Example -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-1">
+                        <div class="text-s font-weight-bold text-success text-uppercase mb-1">매장 공석 안내 (서비스 예정)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Earnings (Monthly) Card Example -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-info shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-1">
+                        <div class="text-s font-weight-bold text-info text-uppercase mb-1">선호도 추천(서비스 예정)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        <!-- Pending Requests Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+          <div class="card border-left-warning shadow h-100 py-2">
+              <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                      <div class="col mr-1">
+                          <div class="text-s font-weight-bold text-warning text-uppercase mb-1">연관 메뉴 추천(서비스 예정)</div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+      </div>
+    </div>
+  </div>
+ 
+
+
+  <!-- 분류기 학습 카드 세션 -->
+  <div class="card shadow mb-4">
+    <!-- Card Header - Accordion -->
+    <a href="#classifierCard" class="d-block card-header py-3 collapsed" data-toggle="collapse" role="button"
+      aria-expanded="false" aria-controls="classifierCard">
+      <h6 class="m-0 font-weight-bold text-primary"><strong>프리미엄 회원 등록하기</strong>(사진 등록하여 분류기 학습)</h6>
+    </a>
+    <!-- Card Content - Collapse -->
+    <div class="collapse" id="classifierCard">
+      <div class="card-body">
+        <div class="form-group">
+          <label for="han_name">한글이름:</label>
+          <input type="text" class="form-control" id="han_name" placeholder="한글 이름을 입력해주세요.(ex:홍길동)">
+        </div>
+        <div class="form-group">
+          <label for="eng_name">영문이름:</label>
+          <input type="text" class="form-control" id="eng_name" placeholder="분류기에 입력될 영어이름을 입력해주세요.(ex:HongGildong)">
+        </div>
+        <!-- <div> 한글이름 <input type="text" id="han_name" value="한글"> </div>
+          <div> 영어이름 <input type="text" id="eng_name" value="english"> </div>
+          <div> <button type="submit" id="classifier">classifier</button> </div> -->
+          <p>분류기 학습 시작 버튼을 누른 후 카메라 모듈 앞에 30초 정도 얼굴을 확인시켜주세요.<br>
+            분류기 학습이 종료된 후에 모델을 새로 불러옵니다. (약 1~2분 소요)</p>
+            <label class="checkbox-inline">
+              <input type="checkbox" id="inlineCheckbox1" value="option1"> 얼굴 인식 서비스를 사용하는 프리미엄 회원 약관에 동의합니다. (얼굴 정보는 해당 서비스 이외에는 사용되지 않습니다.)
+            </label>
+            <div> <button class="btn btn-primary mb-2" type="submit" id="classifier">회원 등록하기(분류기 학습 시작하기)</button> </div>
+            <div id="classifier_desc"> </div>
+          </div>
+    </div>
+  </div>
+
+  <!-- 구매 카드 세션 -->
+  <div class="card shadow mb-4">
+    <!-- Card Header - Accordion / 접을 때 : class에 collapsed 추가, expanded flase -->
+    <a href="#purchaseCard" class="d-block card-header py-3 collapsed" data-toggle="collapse" role="button"
+      aria-expanded="false" aria-controls="purchaseCard">
+      <h6 class="m-0 font-weight-bold text-primary" id="purchase_title"><strong>상품 구매</strong></h6>
+    </a>
+    <!-- Card Content - Collapse / 펴기 : class에 show 추가 -->
+    <div class="collapse" id="purchaseCard"> 
+      <div class="card-body">
+        
+        <!-- Dropdown No Arrow -->
+        
+        <div class="dropdown mb-4">
+          <span>
+          <select class="btn btn-secondary dropdown-toggle" type="button" id="purchaseMenuDropdown" data-toggle="dropdown"
+            aria-haspopup="true">
+            <option value="-1" selected>메뉴를 선택하세요.</option>
+            {% for row in menuData %}
+            <option value="{{ row.menu_name }}" class="{{row.menu_name}}">{{ row.menu_name }} / {{ row.menu_price }}원</option>
+            {% endfor %}
+            
+          </select>
+          </span>
+          <span><button class="btn btn-primary ml-2" id="purchase">구매하기</button></span>
+          <div class="mt-3" id="purchase_message"></div>
+          <div class="mt-3" id="purchase_mng_message"></div>
+        </div>
+        
+
+      </div>
+    </div>
+  </div>
+
+
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript">
+
+    $(document).ready(function() { // 이미지 로딩 스크립트
+      $("img.loading").each(function () {
+        var img = $(this);
+        // 이미지 객체를 만들고 백그라운드에서 로딩한다.
+        var replaceImg = new Image();
+        replaceImg.onload = function () {
+          // data-src의 이미지를 src로 대체시킨다. 
+          img.attr("src", img.attr("data-src"));
+          $("#img_desc").hide()
+        };
+        // 이미지를 저장한다. 이미 캐시되어있다면 캐시된 이미지가 세팅될 것이다.
+        replaceImg.src = $(this).attr("data-src");
+      });
+
+    });
+
+    $("#test").click(function(){ // 테스트 스크립트
+      $.ajax({ // 버튼을 클릭하면 <새로고침> 없이 ajax로 서버와 통신하겠다.
+        url: "/face/caps/", // 통신할 url을 지정
+        dataType: 'json',
+        success: function(data){ // 통신 성공시 - 동적으로 좋아요 갯수 변경, 유저 목록 변경
+          // alert('통신 성공');
+          $("#resultOfTest").text(data.f_name+'님 입장하셨습니다.')
+          $(".f_name").text(data.f_name)
+          $(".f_accuracy").text(data.f_accuracy)
+          $(".f_time").text(data.f_time)
+          // $(".f_image").text(data.f_image)
+        },
+        error: function(request, status, error){ // 통신 실패시 - 로그인 페이지 리다이렉트
+          alert("통신 실패")
+          window.location.replace("/users/service/")
+          //  alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+        },
+      });
+    })
+
+    // 사진 캡쳐
+    $("#capture").click(function(){
+      $.ajax({
+        url: "/face/capture/", 
+        dataType: 'json',
+        success: function(data){
+        },
+        error: function(request, status, error){
+          alert("통신 실패")
+          window.location.replace("/users/service/")
+        },
+      });
+    })
+
+    // 확인 (인식버튼)
+    $("#check").click(function(){
+      $.ajax({
+        url: "/face/check/", 
+        dataType: 'json',
+        success: function(data){
+//          alert("통신 성공")
+          if ( data.f_name === 'none' ) {
+            $(".han_name").text("얼굴이 인식되지 않았습니다.")
+          } else if ( data.han_name === 'undefined') {
+            $(".han_name").text("영문이름에 매칭된 등록 유저 한글 이름이 없습니다.")
+          } else {
+            // $(".han_name").text(data.han_name+"님 안녕하세요.\n 자주 드시던 "+data.fav_menus+"는 어떠세요?")      
+            $("#customer_id").text(data.customer_id)
+            $("#f_name").text(data.f_name)
+            $("#f_han_name").text(data.han_name)
+            $("#f_age").text(data.age)
+            $("#f_gender").text(data.gender)
+            $("#ag_fav_menu0").removeClass("font-weight-bold")
+            $("#ag_fav_menu0").text(data.age+data.gender+"이 좋아하는")
+            $("#ag_fav_menu1").text(data.age_menus[0])
+            $("#ag_fav_menu2").text(data.age_menus[1])      
+            $("#ag_fav_menu3").text(data.age_menus[2])
+            $("#ag_fav_menu4").text("는 어떠세요?")
+            if ( data.f_name === 'Unknown' ) {
+              $("#f_name").text("프리미엄 회원에 등록해주세요.")
+            }
+            if ( data.fav_menus ) {
+              $("#id_fav_menu0").removeClass("font-weight-bold")
+              $("#id_fav_menu0").text(data.han_name+"님이 자주 드시던")
+              $("#id_fav_menu1").text(data.fav_menus[0])      
+              $("#id_fav_menu2").text(data.fav_menus[1])      
+              $("#id_fav_menu3").text(data.fav_menus[2])      
+              $("#id_fav_menu4").text("는 어떠세요?")
+            }
+            else {
+              $("#id_fav_menu0").text("프리미엄 회원에 등록해주세요.")  
+            }
+            
+          }
+        },
+        error: function(request, status, error){
+          alert("통신 실패")
+          window.location.replace("/users/service/")
+        },
+      });
+    })
+    
+    // 분류기
+    $("#classifier").click(function(){
+      $("#classifier_desc").text("등록 중입니다...")
+      $.ajax({
+        type : 'POST',
+        url: "/face/classifier/", 
+        data: {
+              'han_name' : $('#han_name').val(),
+              'eng_name' : $('#eng_name').val()
+        },
+        dataType: 'json',
+        success: function(data){
+          location.reload() // 새로고침
+          // alert("통신 성공")
+        },
+        error: function(request, status, error){
+          alert("통신 실패")
+          window.location.replace("/users/service/")
+        },
+      });
+    })
+
+    // 메뉴 선택 함수
+    function menuSelect(menu_name) {
+      $("#purchaseCard").addClass("show");
+      let loc = document.querySelector("#purchaseCard").offsetTop;
+      let hei = window.pageYOffset
+      window.scrollTo({top: 2000, behavior:'smooth'});
+      $("#purchaseMenuDropdown").val(menu_name).prop("selected", true);
+    };
+
+/*    $("#ag_fav_menu1").click(function(){
+      let menu_name = $("#ag_fav_menu1").text()
+      menuSelect(menu_name)
+    }) */
+
+    // 구매
+    $("#purchase").click(function(){
+      $.ajax({
+        type : 'POST',
+        url: "/face/purchase/", 
+        data: {
+              'selectedMenu' : $('#purchaseMenuDropdown').val(),
+              'customer_id' : $('#customer_id').text(),
+              'name' : $('#f_name').text(),
+        },
+        dataType: 'json',
+        success: function(data){
+          $("#purchase_message").text(data.message)
+          $("#purchase_mng_message").text(data.mng_message)
+          
+          // alert("통신 성공")
+        },
+        error: function(request, status, error){
+          alert("통신 실패")
+          window.location.replace("/users/service/")
+        },
+      });
+    })
+
+
+  </script>
+</div>
+{% endblock %}

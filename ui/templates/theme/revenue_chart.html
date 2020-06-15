@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Charts {% endblock %}
+
+{% block container_fluid %}
+        <!-- Donut Chart -->
+        <div class="col-xl-4 col-lg-5">
+          <div class="card shadow mb-4">
+              <!-- Card Header - Dropdown -->
+              <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary">수입원 차트</h6>
+              </div>
+              <!-- Card Body -->
+              <div class="card-body">
+                  <div class="chart-pie pt-4">
+                      <canvas id="myPieChart"></canvas>
+                  </div>
+                  <hr>
+                  <div class="mt-4 text-center small">
+                    <span class="mr-2">
+                    <i class="fas fa-circle text-primary"></i> 20대
+                    </span>
+                    <span class="mr-2">
+                    <i class="fas fa-circle text-success"></i> 30대
+                    </span>
+                    <span class="mr-2">
+                    <i class="fas fa-circle text-info"></i> 40대
+                    </span>
+                </div>
+              </div>
+          </div>
+      </div>
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+          {% endblock %}
+
+          {% block js_body %} 
+              {% include 'theme/components/charts_scripts.html' %}
+              <!-- Page level custom scripts (Only for charts page) -->
+              <script src="{% static 'js/demo/chart-bar-demo.js' %}"></script>
+          {% endblock %}
+          

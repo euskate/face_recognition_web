@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Tables {% endblock %}
+
+
+{% block css %}
+<!-- Custom styles for this page -->
+<link href="{% static 'vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block container_fluid %}
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">메뉴 정보</h1>
+    <p class="mb-4">판매 메뉴 관리 페이지 입니다. (임의로 부산대역 앞 자스민의 메뉴판을 등록하였습니다.)</p>
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">메뉴 정보</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>메뉴명</th>
+                            <th>메뉴가격</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>메뉴명</th>
+                            <th>메뉴가격</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        {% for row in menuData %}
+                        <tr>
+                            <td>{{ row.menu_name }}</td>
+                            <td>{{ row.menu_price }}</td>
+                        </tr>
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block js_body %}
+<!-- Data Tables -->
+<script src="{% static 'vendor/datatables/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'vendor/datatables/dataTables.bootstrap4.min.js' %}"></script>
+<script src="{% static 'js/demo/datatables-demo.js' %}"></script>
+{% endblock %}

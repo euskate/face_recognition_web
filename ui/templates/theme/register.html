@@ -1,0 +1,77 @@
+{% extends 'base_x.html' %}
+{% load static %}
+
+{% block title %} Register {% endblock %}
+
+{% block container %}
+<div class="container">
+    <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+                <!--
+                    <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                -->
+                <div class="col-lg-8 offset-lg-2">
+                    <div class="p-5">
+                        <div class="text-center">
+                            <h1 class="h4 text-gray-900 mb-4">Create An Account!</h1>
+                        </div>
+                        <form class="user">
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <label for="first_name">First name</label>
+                                    <input type="text" class="form-control form-control-user" id="first_name" placeholder="First Name" value="Wes">
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="last_name">Last name</label>
+                                    <input type="text" class="form-control form-control-user" id="last_name" placeholder="Last Name" value="McKinney">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" class="form-control form-control-user" id="email" placeholder="Email Address" value="wes@gmail.com">
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <label for="password">Password</label>
+                                    <input type="password" class="form-control form-control-user" id="password" placeholder="Password" value="Wes@123">
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="conf_password">Confirm Password</label>
+                                    <input type="password" class="form-control form-control-user" id="conf_password" placeholder="Repeat Password" value="Wes@123">
+                                </div>
+                            </div>
+                            <a href="{% url 'users:login_url' %}" class="btn btn-primary btn-user btn-block">
+                            Register Account
+                            </a>
+                            <hr>
+                            <a href="{% url 'index_url' %}" class="btn btn-google btn-user btn-block">
+                              <i class="fab fa-google fa-fw"></i> Register with Google
+                            </a>
+                            <a href="{% url 'index_url' %}" class="btn btn-facebook btn-user btn-block">
+                              <i class="fab fa-facebook-f fa-fw"></i> Register with Facebook
+                            </a>
+                        </form>
+                        <hr>
+                        <div class="text-center">
+                            <a class="small" href="{% url 'users:forgot_password_url' %}">Forgot Password?</a>
+                        </div>
+                        <div class="text-center">
+                            <a class="small" href="{% url 'users:login_url' %}">Already have an account? Login!</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block js_body %}
+  <script type="text/javascript">
+      $(document).ready(function() {
+          $('.register-top-right-link').addClass('active-nav-link-x')
+      })
+  </script>
+{% endblock %}

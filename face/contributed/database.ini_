@@ -1,0 +1,6 @@
+[postgresql]
+host=192.168.0.60
+; database=django_db
+database=postgres
+user=user
+password=password
