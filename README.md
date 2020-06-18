@@ -26,6 +26,27 @@
 |이미지 처리|opencv|
 |css framework|bootstrap|
 
+  - /config/settings.py
+  - /face/views.py
+  
+- 모델 경로 수정
+  - /face/face.py
+  - /face/views.py
+
+- 모델 분할 압축
+  - 모델은 용량 문제로 분할 압축하였습니다. (3종류의 모델 첨부)
+  - /models/
+    - model2018 : VGG model
+    - model_kfcl12 : kface, asian_celeb 전이학습 1차 모델
+    - model_kfcl63 : kface, asian_celeb 전이학습 2차 모델
+
+- 웹 : django
+- 데이터베이스 : postgreSQL
+- 학습 : tensorflow
+- 이미지 처리 : openCV
+- css framwork : bootstrap
+- 주요 라이브러리
+
 ```
 tensorflow          1.7.0
 opencv-python       4.2.0.34
