@@ -42,7 +42,8 @@ class VideoCamera(object):
         self.trigger = 0
 
         # 라즈베리 파이 카메라 모듈로 촬영된 스트리밍(mjpg-streamer)을 가져온다.
-        self.video = cv2.VideoCapture('http://192.168.0.101:8091/?action=stream')
+        self.video = cv2.VideoCapture(0)
+        # self.video = cv2.VideoCapture('http://192.168.0.101:8091/?action=stream')
 
     def __del__(self):
         self.video.release()
@@ -57,7 +58,7 @@ class VideoCamera(object):
                             (63, 28, 1), 2) # 색상(B, G, R), 두께 pixel
 
                 # 얼굴의 정확도가 0.75 이하인 경우 아래와 같이 정의한다
-                if face.accuracy < 0.6 :  
+                if face.accuracy < 0.65 :  # 임계치 threshold
                     face.name = "Unknown" # Modified
                     color = ( 0, 0, 255 ) # Modified
 
@@ -108,7 +109,7 @@ class VideoCamera(object):
     # 프레임을 가져오는 메소드
     def get_frame(self):
         ret,frame = self.video.read()
-        frame = cv2.flip(frame,0) # 상하반전
+        # frame = cv2.flip(frame,0) # 상하반전
         global face_lists
         # 가져온 프레임에서 얼굴 id 인식 - 설정된 interval 마다 수행
         if (self.frame_count % self.frame_interval) == 0:
