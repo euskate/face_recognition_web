@@ -1,5 +1,5 @@
 # IoT와 얼굴인식 기술을 이용한 매장관리 시스템
-
+----
 ## Explanation our service
 
 - **Recommend**  추정한 연령, 성별에 따라 자주 구매하는 제품을 추천상품으로 제안
